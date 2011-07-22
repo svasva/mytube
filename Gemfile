@@ -8,13 +8,24 @@ gem 'rails', '3.1.0.rc4'
 gem 'sqlite3'
 gem 'haml'
 # Asset template engines
+
 gem 'json'
 gem 'sass-rails', "~> 3.1.0.rc"
 gem 'coffee-script'
 gem 'uglifier'
 
 gem 'jquery-rails'
+gem 'tilt', :git => 'git://github.com/thisduck/tilt.git'
+gem 'less-js'
+
+# custom
 gem 'devise'
+gem 'paperclip'
+gem 'aasm'
+gem 'resque'
+gem 'SystemTimer'
+gem 'streamio-ffmpeg'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 

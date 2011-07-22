@@ -1,0 +1,3 @@
+= form_for :video, :url => videos_path, :html => { :multipart => true, :method => :post } do |form|
+	%p= form.file_field :source
+	%p= form.submit "Submit"

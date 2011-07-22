@@ -7,3 +7,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function() {
+	// convert email tags into mailto: links
+	$.each($('email'), function(i,v) {
+		$(v).html($('<a>').attr('href', 'mailto: '+ $(v).text()).html($(v).text()));
+	});
+});

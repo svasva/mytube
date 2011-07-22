@@ -5,3 +5,53 @@
  *= require_self
  *= require_tree . 
 */
+
+body {
+	padding: 0px;
+	margin: 0px;
+}
+
+#yield {
+	padding: 5px 15px;
+}
+
+#logo {
+	height: 80px;
+	font-size: 5em;
+	font-family: arial;
+	text-shadow: #78c -1px -1px 5px;
+	padding-bottom: 0.2em;
+	text-align: center;
+}
+
+#nav {
+	border-top: 1px dashed #ddd;
+	border-bottom: 1px dashed #ddd;
+	background-color: #eef;
+	padding: 0px 15px;
+	text-align: right;
+	height: 40px;
+	line-height: 40px;
+}
+
+#nav #menu {
+	float: left;
+}
+
+a {
+	color: #447;
+	text-decoration: none;
+}
+
+a.logo {
+	color: #56a;
+}
+
+a:hover {
+	color: #669;
+	text-decoration: underline;
+}
+a.logo:hover {
+	color: #78c;
+	text-decoration: none;
+}
