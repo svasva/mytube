@@ -9,7 +9,9 @@
 - @videos.each do |video|
 	- next unless video.aasm_current_state == :converted
 	.video
-		.videoInner
-			%a.flv(href='#{video.flvurl}' id='player')
+		.Inner
+			%a.flv(href='#{video.flvurl}' id='player' style='height: #{(video.height.to_i / video.meta[:aspect]).round}px; width: 480px;')
 				%img(src='#{video.thumburl}')
-		.videoFooter= video.source
+		.Footer
+			= video.source
+			.Operations= link_to 'Delete', video_path(video), :method => 'DELETE', :confirm => 'Are you sure?'

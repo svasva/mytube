@@ -14,10 +14,10 @@ class VideoConverter
         ', size: ' + video.source_meta[:size] +
         ', aspect: ' + video.source_meta[:aspect].to_s
       convert360p(video)
-      
+
     end
   end
-  
+
   protected
 
   def self.convert360p(video)
@@ -25,23 +25,25 @@ class VideoConverter
     video.convert!
     fname = 'public'+video.source.url
     movie = FFMPEG::Movie.new(fname)
+    options = {:resolution => '480x360'}
+    transcoder_options = {:preserve_aspect_ratio => :width}
+    movie.transcode(fname.gsub(/\..*$/,'.flv'), options, transcoder_options) ? video.converted! : video.failed!
     makethumbnail(video)
-    movie.transcode(fname.gsub(/\..*$/,'.flv')) ? video.converted! : video.failed!
     video.save
   end
-  
+
   def self.convert480p(file)
   end
-  
+
   def self.convert720p(file)
   end
-  
+
   def self.makethumbnail(video)
     thumb = "public#{video.source.url.gsub(/\..*$/, '.jpg')}"
-    system("#{@ffmpeg} -ss 5 -i public#{video.source.url} -r 1 -f mjpeg -vframes 1 #{thumb}")
+    system("#{@ffmpeg} -ss 5 -i public#{video.flvurl} -r 1 -f mjpeg -vframes 1 #{thumb}")
     system("#{@composite} -gravity center #{@playbutton} #{thumb} #{thumb}")
   end
-  
+
   def self.identify(file)
     meta = {}
     command = "ffmpeg -i #{File.expand_path(file.path)} 2>&1"

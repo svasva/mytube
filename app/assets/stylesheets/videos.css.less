@@ -7,18 +7,38 @@ body.videos {
   // Then, place scoped styles here.
 }
 
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+
+.rounded-corners-bottom (@radius: 3px) {
+  border-radius: 0px 0px @radius @radius;
+  -webkit-border-radius: 0px 0px @radius @radius;
+  -moz-border-radius: 0px 0px @radius @radius;
+}
+
 .video {
-	border: 1px dashed gray;
+	border: 1px solid gray;
 	padding: 5px;
-	width:490px;
-	.videoInner {
-		margin: auto auto;
-		width: 480px;
-		height: 360px;
-		padding: 2px;
-		border: 1px solid #aaa;
+	width:480px;
+	.rounded-corners;
+	.Inner {
+		a {
+			display: block;
+			width: 480px;
+		}
 	}
-	.videoFooter {
+	.Footer {
+		text-align: center;
+		font-family: tahoma,verdana;
+		font-size: 0.8em;
+		.rounded-corners-bottom;
+		border: 1px solid #ddd;
 		padding: 5px;
+		.Operations {
+			float: right;
+		}
 	}
 }

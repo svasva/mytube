@@ -1,3 +1,5 @@
+require 'FileUtils'
+
 class VideosController < ApplicationController
   before_filter :authenticate_user!, :only => :new
   def index
@@ -24,5 +26,11 @@ class VideosController < ApplicationController
   end
 
   def update
+  end
+
+  def destroy
+    FileUtils.rm_rf "public/system/sources/#{params[:id]}"
+    Video.find(params[:id]).destroy
+    redirect_to videos_path
   end
 end
