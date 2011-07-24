@@ -1,0 +1,14 @@
+.comments
+	- unless video.comments.empty?
+		Comments: <br/><br/>
+		- video.comments.each do |comment|
+			- next if comment.parent
+			= render :partial => 'videos/comment', :locals => { :comment => comment }
+
+	= form_for Comment.new, :url => comments_path, :html => { :method => :post } do |form|
+		/ %a.reset(href='#') reply to original video<br/>
+		= form.text_area :text, :title => 'Your comment here', :class => 'text-label'
+		= form.hidden_field :video_id, :value => video.id
+		= form.hidden_field :parent_id
+		= form.submit 'Submit comment'
+		%button.reset Cancel reply

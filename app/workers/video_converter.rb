@@ -9,10 +9,6 @@ class VideoConverter
     videos = Video.where :current_state => :pending
     videos.each do |video|
       video.source_meta = identify(video.source)
-      puts video.source.url
-      puts video.source.url + ', length:' + video.source_meta[:length] +
-        ', size: ' + video.source_meta[:size] +
-        ', aspect: ' + video.source_meta[:aspect].to_s
       convert360p(video)
 
     end
@@ -25,7 +21,7 @@ class VideoConverter
     video.convert!
     fname = 'public'+video.source.url
     movie = FFMPEG::Movie.new(fname)
-    options = {:resolution => '480x360', :custom => '-sameq' }
+    options = {:resolution => '480x360', :audio_sample_rate => 22050, :custom => '-sameq' }
     transcoder_options = {:preserve_aspect_ratio => :width}
     movie.transcode(fname.gsub(/\..*$/,'.flv'), options, transcoder_options) ? video.converted! : video.failed!
     makethumbnail(video)
@@ -40,8 +36,8 @@ class VideoConverter
 
   def self.makethumbnail(video)
     thumb = "public#{video.source.url.gsub(/\..*$/, '.jpg')}"
-    puts video.source_meta[:aspect]
-    system("#{@ffmpeg} -ss 2 -i public#{video.flvurl} -r 1 -f mjpeg -aspect #{video.source_meta[:aspect]} -s 320x180 -vframes 1 #{thumb}")
+    pad = "\"320:180:(iw-ow)/2:(ih-oh)/2\""
+    system("#{@ffmpeg} -ss 2 -i public#{video.flvurl} -r 1 -f mjpeg -aspect #{video.source_meta[:aspect]} -vf pad=#{pad} -s 320x180 -vframes 1 #{thumb}")
     #system("#{@composite} -gravity center #{@playbutton} #{thumb} #{thumb}")
   end
 

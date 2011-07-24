@@ -1,0 +1,17 @@
+.comment(id='#{comment.id}')
+	.inner
+		.header
+			%email> #{comment.author.email}
+			, #{time_ago_in_words(comment.created_at)} ago
+			.Operations
+				&raquo;
+				%a.reply(href='#' data-commentid='#{comment.id}') reply
+				- if user_signed_in? and comment.author == current_user
+					&raquo;
+					= link_to 'delete', comment_path(comment), :method => 'DELETE', :confirm => 'Are you sure?'
+					&raquo;
+		.body #{comment.text}
+	.commentReply(id='reply#{comment.id}')
+		- unless comment.replies.empty?
+			- comment.replies.each do |reply|
+				= render :partial => 'comment', :locals => { :comment => reply }

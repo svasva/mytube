@@ -1,13 +1,17 @@
-require 'FileUtils'
-
 class VideosController < ApplicationController
   before_filter :authenticate_user!, :only => :new
   def index
-    @videos = Video.find :all
+    (params[:my]) ? @videos = current_user.videos : @videos = Video.find(:all)
   end
 
   def new
     @video = Video.new
+    unless params[:filename]
+      redirect_to :back
+      return
+    end
+    @video.source = File.new(params[:filename])
+    redirect_to :back unless @video.source
   end
 
   def create
@@ -30,8 +34,16 @@ class VideosController < ApplicationController
   end
 
   def destroy
-    FileUtils.rm_rf "public/system/sources/#{params[:id]}"
     Video.find(params[:id]).destroy
     redirect_to videos_path
+  end
+
+  def upload
+    extension = File.extname(params[:Filedata].original_filename).downcase
+    name = "#{SecureRandom.hex(16)}#{extension}"
+    dir = "tmp/uploads"
+    path = File.join(dir,name)
+    File.open(path, "wb") {|f| f.write(params[:Filedata].read) }
+    render :text => "#{dir}/#{name}"
   end
 end

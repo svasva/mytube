@@ -51,6 +51,7 @@ Mytube::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'videos#index'
+  match '/upload' => 'videos#upload'
   resources :videos
   resources :comments
   # See how all your routes lay out with "rake routes"

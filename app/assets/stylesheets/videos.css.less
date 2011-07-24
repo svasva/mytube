@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@rightWidth: 300px;
+
 body.videos {
   // Add the videos class to your body tag
   // Then, place scoped styles here.
@@ -28,7 +30,9 @@ img {
 	width: 320px;
 	border: 1px solid gray;
 	margin-bottom: 10px;
+	margin-right: 10px;
 	padding: 5px;
+	float: left;
 	.rounded-corners;
 	img {
 		margin-bottom: -4px;
@@ -47,17 +51,12 @@ img {
 }
 
 .video {
+	margin-right: @rightWidth+50;
 	border: 1px solid gray;
 	margin-bottom: 10px;
 	padding: 5px;
-	width:480px;
 	.rounded-corners;
-	.Inner {
-		a {
-			display: block;
-			width: 480px;
-		}
-	}
+	.Inner { height: 400px; }
 	.Footer {
 		text-align: center;
 		font-family: tahoma,verdana;
@@ -74,7 +73,44 @@ img {
 .rightnav {
 	border-left: 1px dashed gray;
 	padding-left: 10px;
-	width: 400px;
+	width: @rightWidth;
 	float: right;
 	display: inline;
+}
+
+.comments {
+	margin-right: @rightWidth + 50px;
+	margin-bottom: 20px;
+	form {
+		margin: 10px 0;
+	}
+	.comment {
+		.inner {
+			.rounded-corners(10px);
+			padding: 10px;
+			border: 1px dashed #ddd;
+			margin-bottom: 10px;
+		}
+		.header {
+			height: 40px;
+			background-image: url(/assets/quote.gif);
+			background-repeat: no-repeat;
+			text-align: left;
+			padding: 5px;
+			margin-top: -10px;
+			padding-top: 8px;
+			padding-left: 60px;
+			.Operations { text-align: left;}
+		}
+		.body { padding-left: 5px; }
+		.commentReply {
+			margin-left: 65px;
+		}
+	}
+	textarea {
+		margin-right: 15px;
+		width: 99%;
+		display: block;
+		height: 100px;
+	}
 }
