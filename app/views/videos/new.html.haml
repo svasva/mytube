@@ -1,4 +1,10 @@
-= form_for :video, :url => videos_path, :html => { :multipart => true, :method => :post } do |form|
-	%p= form.text_field :title, :title => 'Video title'
-	%p= form.text_area :description, :title => 'Video description'
-	%p= form.submit "Submit"
+.wrapper
+	= form_for :video, :url => videos_path, :html => { :multipart => true, :method => :post, :id => 'new_video' } do |form|
+		.videothumb
+			%img(src='/#{params[:filename].gsub(/\..*$/, '.jpg')}')
+			.Footer.nopadding
+				= form.text_field :title, :title => 'Click here to set video label', :class => 'borderless'
+		= form.hidden_field :source_file_name, :value => params[:filename]
+		= form.text_area :description, :title => 'Video description'
+		<br/>
+		= form.submit "Submit"

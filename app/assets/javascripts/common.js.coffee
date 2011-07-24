@@ -18,3 +18,11 @@ $(document).ready ->
 		link = $('<a>').attr 'href', 'mailto: ' + $(v).text()
 		link.html $(v).text()
 		$(v).html link
+	$('a.upload').click ->
+		$('span.upload').css
+			top: $(this).offset().top + $(this).height() + 12
+			left: $(this).offset().left - 5
+		if $('span.upload').is(':visible')
+			$('span.upload').slideUp 300
+		else
+			$('span.upload').slideDown 300

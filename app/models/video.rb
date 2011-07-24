@@ -3,10 +3,9 @@ class Video < ActiveRecord::Base
   belongs_to :author, :class_name => 'User', :foreign_key => 'user_id'
   has_many :comments
   has_attached_file :source
-  before_create :randomize_file_name
+  #before_create :randomize_file_name
   before_destroy :delete_files
   # Paperclip Validations
-  validates_attachment_presence :source
   #validates_attachment_content_type :source, :content_type => 'video/quicktime'
 
   include AASM

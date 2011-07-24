@@ -5,7 +5,9 @@
 		= link_to 'Home', '/'
 		- if user_signed_in?
 			|
-			= link_to 'Upload new', '/videos/new'
+			%a.upload(href='#') Upload video
+			%span.upload
+				%input(type='file' id='video_source')
 			|
 			= link_to 'My Videos', '/?my=true'
 			#usernav

@@ -1,5 +1,5 @@
 %script
-	$(document).ready(function() { flowplayer("player", "/flowplayer.swf",  {clip: {autoPlay: false, scaling: 'fit'} }); });
+	$(document).ready(function() { flowplayer("player", "/flowplayer.swf",  {clip: {autoPlay: true, scaling: 'fit'} }); });
 .rightnav
 	Video by
 	%email= @video.author.email
@@ -7,7 +7,6 @@
 	Uploaded at #{@video.created_at.to_s(:long)} <br/><br/>
 .video
 	.Inner
-		/ = @video.meta[:aspect]
 		%div.flv(href='#{@video.flvurl}' id='player')
 	.Footer
 		%a(href='#{video_path(@video)}') #{@video.title}

@@ -37,5 +37,8 @@ $(document).ready ->
 			script: '/upload'
 			cancelImg: '/assets/cancel.png'
 			auto: true
+			buttonText: 'Select file'
+			onSelect: ->
+				$('span.upload').css 'height', 100
 			onComplete: (event, ID, fileObj, response, data) ->
 				window.location.href = '/videos/new?filename=' + encodeURIComponent response
