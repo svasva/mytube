@@ -1,17 +1,7 @@
-%script(src='http://static.flowplayer.org/js/flowplayer-3.2.6.min.js')
-%style .flv { display:block; }
-%script
-	$(document).ready(function(){ |
-		flowplayer("player", "/flowplayer.swf", { |
-			clip: { autoPlay: true } |
-		}); |
-	});
 - @videos.each do |video|
 	- next unless video.aasm_current_state == :converted
-	.video
-		.Inner
-			%a.flv(href='#{video.flvurl}' id='player' style='height: #{(video.height.to_i / video.meta[:aspect]).round}px; width: 480px;')
-				%img(src='#{video.thumburl}')
+	.videothumb
+		%a(href='#{video_path(video)}')
+			%img(src='#{video.thumburl}')
 		.Footer
-			= video.source
-			.Operations= link_to 'Delete', video_path(video), :method => 'DELETE', :confirm => 'Are you sure?'
+			%a(href='video_path(video)')= video.title

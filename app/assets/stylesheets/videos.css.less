@@ -19,8 +19,36 @@ body.videos {
   -moz-border-radius: 0px 0px @radius @radius;
 }
 
+img {
+	padding: 0px;
+	margin: 0px;
+}
+
+.videothumb {
+	width: 320px;
+	border: 1px solid gray;
+	margin-bottom: 10px;
+	padding: 5px;
+	.rounded-corners;
+	img {
+		margin-bottom: -4px;
+	}
+	.Footer {
+		text-align: center;
+		font-family: tahoma,verdana;
+		font-size: 0.8em;
+		.rounded-corners-bottom;
+		border: 1px solid #ddd;
+		padding: 5px;
+		.Operations {
+			float: right;
+		}
+	}
+}
+
 .video {
 	border: 1px solid gray;
+	margin-bottom: 10px;
 	padding: 5px;
 	width:480px;
 	.rounded-corners;
@@ -41,4 +69,12 @@ body.videos {
 			float: right;
 		}
 	}
+}
+
+.rightnav {
+	border-left: 1px dashed gray;
+	padding-left: 10px;
+	width: 400px;
+	float: right;
+	display: inline;
 }

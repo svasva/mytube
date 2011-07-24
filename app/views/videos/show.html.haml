@@ -1,0 +1,20 @@
+%script
+	$(document).ready(function() { flowplayer("player", "/flowplayer.swf"); });
+.rightnav
+	Video by
+	%email= @video.author.email
+	%br/
+	Uploaded at #{@video.created_at.to_s(:long)}
+	%br/
+	%br/
+	Your comment: <br/>
+	%form
+	%textarea
+	%submit
+.video
+	.Inner
+		%a.flv(href='#{@video.flvurl}' id='player' style='height: #{(@video.height.to_i / @video.meta[:aspect]).round}px; width: 480px;')
+	.Footer
+		%a(href='#{video_path(@video)}') #{@video.title}
+		- if user_signed_in? and current_user == @video.author
+			.Operations= link_to 'Delete', video_path(@video), :method => 'DELETE', :confirm => 'Are you sure?'

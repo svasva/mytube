@@ -25,7 +25,7 @@ class VideoConverter
     video.convert!
     fname = 'public'+video.source.url
     movie = FFMPEG::Movie.new(fname)
-    options = {:resolution => '480x360'}
+    options = {:resolution => '480x360', :custom => '-sameq' }
     transcoder_options = {:preserve_aspect_ratio => :width}
     movie.transcode(fname.gsub(/\..*$/,'.flv'), options, transcoder_options) ? video.converted! : video.failed!
     makethumbnail(video)
@@ -40,8 +40,9 @@ class VideoConverter
 
   def self.makethumbnail(video)
     thumb = "public#{video.source.url.gsub(/\..*$/, '.jpg')}"
-    system("#{@ffmpeg} -ss 5 -i public#{video.flvurl} -r 1 -f mjpeg -vframes 1 #{thumb}")
-    system("#{@composite} -gravity center #{@playbutton} #{thumb} #{thumb}")
+    puts video.source_meta[:aspect]
+    system("#{@ffmpeg} -ss 2 -i public#{video.flvurl} -r 1 -f mjpeg -aspect #{video.source_meta[:aspect]} -s 320x180 -vframes 1 #{thumb}")
+    #system("#{@composite} -gravity center #{@playbutton} #{thumb} #{thumb}")
   end
 
   def self.identify(file)
