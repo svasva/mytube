@@ -1,5 +1,4 @@
 require 'fileutils'
-ffmpeg = '/opt/local/bin/ffmpeg'
 class VideosController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show, :upload]
   def index
@@ -23,12 +22,10 @@ class VideosController < ApplicationController
     file = @video.source_file_name
     @video.source = File.new(file)
     if @video.save
-      FileUtils.rm(file)
+      #FileUtils.rm(file)
       @video.convert
       flash[:notice] = 'Video has been uploaded'
       redirect_to :action => 'index'
-    else
-      render :action => 'new'
     end
   end
 
@@ -58,8 +55,9 @@ class VideosController < ApplicationController
     File.open(path, "wb") {|f| f.write(params[:Filedata].read) }
     logger.info 'step2'
     thumb = "public/tmp/uploads/#{name.gsub(/\..*$/, '.jpg')}"
-    pad = "\"320:180:(iw-ow)/2:(ih-oh)/2\""
-    system("/opt/local/bin/ffmpeg -ss 2 -i #{dir}/#{name} -r 1 -f mjpeg -vf pad=#{pad} -s 320x180 -vframes 1 #{thumb} 2>&1 >> tmp/ff.log")
+    logger.info "/usr/bin/ffmpeg -ss 2 -i #{dir}/#{name} -r 1 -f mjpeg -s 320x180 -vframes 1 #{thumb} 2>&1 >> tmp/ff.log"
+    puts "/usr/bin/ffmpeg -ss 2 -i #{dir}/#{name} -r 1 -f mjpeg -s 320x180 -vframes 1 #{thumb} 2>&1 >> tmp/ff.log"
+    system("/usr/bin/ffmpeg -ss 2 -i #{dir}/#{name} -r 1 -f mjpeg -s 320x180 -vframes 1 #{thumb} 2>&1 >> tmp/ff.log")
     logger.info 'step4'
     render :text => "#{dir}/#{name}"
   end

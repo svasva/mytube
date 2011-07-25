@@ -23,12 +23,13 @@ gem 'devise'
 gem 'paperclip'
 gem 'aasm'
 gem 'resque'
-gem 'SystemTimer'
+#gem 'SystemTimer'
 gem 'streamio-ffmpeg'
 gem 'flash_cookie_session'
+gem 'therubyracer'
 
 # Use unicorn as the web server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
 # gem 'capistrano'

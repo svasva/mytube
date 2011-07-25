@@ -53,7 +53,7 @@ Mytube::Application.routes.draw do
   root :to => 'videos#index'
   match '/upload' => 'videos#upload'
 
-  #match '/videos/my' => 'videos#my'
+  match '/videos/my' => 'videos#my'
   resources :videos
   resources :comments
   # See how all your routes lay out with "rake routes"

@@ -2,8 +2,8 @@
 class VideoConverter
   @queue = :VideoConversion
   @cmd360p = ''
-  @ffmpeg = '/opt/local/bin/ffmpeg'
-  @composite = '/opt/local/bin/composite'
+  @ffmpeg = '/usr/bin/ffmpeg'
+  @composite = '/usr/bin/composite'
   @playbutton = 'play.png'
   def self.perform()
     videos = Video.where :current_state => :pending
@@ -37,7 +37,7 @@ class VideoConverter
   def self.makethumbnail(video)
     thumb = "public#{video.source.url.gsub(/\..*$/, '.jpg')}"
     pad = "\"320:180:(iw-ow)/2:(ih-oh)/2\""
-    system("#{@ffmpeg} -ss 2 -i public#{video.flvurl} -r 1 -f mjpeg -aspect #{video.source_meta[:aspect]} -vf pad=#{pad} -s 320x180 -vframes 1 #{thumb}")
+    system("#{@ffmpeg} -ss 2 -i public#{video.flvurl} -r 1 -f mjpeg -aspect #{video.source_meta[:aspect]} -s 320x180 -vframes 1 #{thumb}")
     #system("#{@composite} -gravity center #{@playbutton} #{thumb} #{thumb}")
   end
 
