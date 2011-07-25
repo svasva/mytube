@@ -54,6 +54,8 @@ GEM
     erubis (2.7.0)
     execjs (1.2.0)
       multi_json (~> 1.0)
+    flash_cookie_session (1.1.1)
+      rails (~> 3.0)
     haml (3.1.2)
     hike (1.2.0)
     i18n (0.6.0)
@@ -147,6 +149,7 @@ DEPENDENCIES
   aasm
   coffee-script
   devise
+  flash_cookie_session
   haml
   jquery-rails
   json

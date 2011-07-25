@@ -52,7 +52,8 @@ Mytube::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'videos#index'
   match '/upload' => 'videos#upload'
-  match '/videos/my' => 'videos#my'
+
+  #match '/videos/my' => 'videos#my'
   resources :videos
   resources :comments
   # See how all your routes lay out with "rake routes"

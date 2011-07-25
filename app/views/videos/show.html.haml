@@ -4,7 +4,9 @@
 	Video by
 	%email= @video.author.email
 	%br/
-	Uploaded at #{@video.created_at.to_s(:long)} <br/><br/>
+	Posted at #{@video.created_at.to_s(:long)} <br/><br/>
+	- if @video.description
+		Description: #{@video.description}
 .video
 	.Inner
 		%div.flv(href='#{@video.flvurl}' id='player')

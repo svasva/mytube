@@ -25,6 +25,7 @@ gem 'aasm'
 gem 'resque'
 gem 'SystemTimer'
 gem 'streamio-ffmpeg'
+gem 'flash_cookie_session'
 
 # Use unicorn as the web server
 # gem 'unicorn'

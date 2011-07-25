@@ -18,7 +18,8 @@ $(document).ready ->
 		link = $('<a>').attr 'href', 'mailto: ' + $(v).text()
 		link.html $(v).text()
 		$(v).html link
-	$('a.upload').click ->
+	$('a.upload').click (e) ->
+		e.preventDefault()
 		$('span.upload').css
 			top: $(this).offset().top + $(this).height() + 12
 			left: $(this).offset().left - 5

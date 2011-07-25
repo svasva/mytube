@@ -32,12 +32,17 @@ $(document).ready ->
 			
 			
 	if $('#video_source').length
+		session_token = $('meta[name="session-token"]').attr 'content'
 		$('#video_source').uploadify
 			uploader: '/uploadify.swf'
 			script: '/upload'
 			cancelImg: '/assets/cancel.png'
 			auto: true
 			buttonText: 'Select file'
+			scriptData:
+				authenticity_token: encodeURIComponent $('meta[name="csrf-token"]').attr 'content'
+				_mytube_session: encodeURIComponent session_token
+				method: '_put'
 			onSelect: ->
 				$('span.upload').css 'height', 100
 			onComplete: (event, ID, fileObj, response, data) ->

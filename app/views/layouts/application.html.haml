@@ -5,6 +5,28 @@
 		= stylesheet_link_tag    "application"
 		= javascript_include_tag "application"
 		= csrf_meta_tags
+		-# %script
+			$(document).ready(function(){ |
+			if ($('#video_source').length) { |
+				$('#video_source').uploadify({ |
+					uploader: '/uploadify.swf', |
+					script: '/upload', |
+					cancelImg: '/assets/cancel.png', |
+					auto: true, |
+					buttonText: 'Select file', |
+					scriptData: { |
+						"#{ key = Rails.application.config.session_options[:key] }": "#{cookies[key]}", |
+						"#{ request_forgery_protection_token }": "#{ form_authenticity_token }" |
+					}, |
+					onSelect: function() { |
+						$('span.upload').css('height', 100); |
+					}, |
+					onComplete: function(event, ID, fileObj, response, data) { |
+						window.location.href = '/videos/new?filename=' + encodeURIComponent(response); |
+					} |
+				}); |
+			} |
+			});
 	%body
 		= render :partial => 'layouts/header'
 		#yield= yield
