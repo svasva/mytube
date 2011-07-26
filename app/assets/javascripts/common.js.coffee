@@ -21,7 +21,7 @@ $(document).ready ->
 	$('a.upload').click (e) ->
 		e.preventDefault()
 		$('span.upload').css
-			top: $(this).offset().top + $(this).height() + 12
+			top: $(this).offset().top + $(this).height() + 10
 			left: $(this).offset().left - 5
 		if $('span.upload').is(':visible')
 			$('span.upload').slideUp 300

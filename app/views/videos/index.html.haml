@@ -1,7 +1,7 @@
 - @videos.each do |video|
 	- next unless video.aasm_current_state == :converted
 	.videothumb
-		%a(href='#{video_path(video)}')
+		%a(href='/videos/#{video.id}')
 			%img(src='#{video.thumburl}')
 		.Footer
-			%a(href='video_path(video)')= video.title
+			%a(href='/videos/#{video.id}')= video.title
