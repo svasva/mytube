@@ -30,7 +30,7 @@ class VideosController < ApplicationController
   end
 
   def show
-    @video = Video.find(params[:id], :include => { :comments => { :replies } })
+    @video = Video.find(params[:id], :include => { :comments => [{:replies => :author}, :author] })
   end
 
   def update
