@@ -5,10 +5,6 @@ class VideosController < ApplicationController
     @videos = Video.find(:all)
   end
 
-  def test
-  	zzz
-  end
-
   def my
     @videos = current_user.videos
     render :template => 'videos/index'
