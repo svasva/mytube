@@ -11,7 +11,7 @@ class VideosController < ApplicationController
   end
 
   def new
-    redirect_to :back unless params[:filename]
+    redirect_to :action => :index unless params[:filename]
     @video = Video.new
   end
 

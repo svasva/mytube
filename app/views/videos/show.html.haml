@@ -16,3 +16,5 @@
 		- if user_signed_in? and current_user == @video.author
 			.Operations= link_to 'delete', video_path(@video), :method => 'DELETE', :confirm => 'Are you sure?'
 = render :partial => 'comments', :locals => { :video => @video }
+
+  
