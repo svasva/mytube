@@ -8,11 +8,11 @@
 	Posted at #{@video.created_at.to_s(:long)} <br/><br/>
 	- if @video.description
 		Description: #{@video.description}
-	.video
-		.Inner
-			%div.flv(href='#{@video.flvurl}' style='width:100%;height:100%;' id='player')
-		.Footer
-			%a(href='#{video_path(@video)}') #{@video.title}
-			- if user_signed_in? and current_user == @video.author
-				.Operations= link_to 'delete', video_path(@video), :method => 'DELETE', :confirm => 'Are you sure?'
+.video
+	.Inner
+		%div.flv(href='#{@video.flvurl}' style='width:100%;height:100%;' id='player')
+	.Footer
+		%a(href='#{video_path(@video)}') #{@video.title}
+		- if user_signed_in? and current_user == @video.author
+			.Operations= link_to 'delete', video_path(@video), :method => 'DELETE', :confirm => 'Are you sure?'
 = render :partial => 'comments', :locals => { :video => @video }
