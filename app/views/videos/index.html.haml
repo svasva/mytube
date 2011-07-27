@@ -1,7 +1,15 @@
 - @videos.each do |video|
-	- next unless video.aasm_current_state == :converted
-	.videothumb
-		%a(href='/videos/#{video.id}')
-			%img(src='#{video.thumburl}')
-		.Footer
-			%a(href='/videos/#{video.id}')= video.title
+  - next if video.aasm_current_state != :converted and controller.action_name != 'my'
+  .videothumb
+    - if video.aasm_current_state == :converted
+      %a(href='/videos/#{video.id}')
+        %img(src='#{video.thumburl}')
+    - else
+      - case video.aasm_current_state
+        - when (:pending or :failed)
+          .status this video is in queue for processing
+        - when :converting
+          .status(style='background-image: url(#{video.thumburl});')
+            .alpha this video is being processed now
+    .Footer
+      %a(href='/videos/#{video.aasm_current_state == :converted ? video.id : 'my' }')= video.title
