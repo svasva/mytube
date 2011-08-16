@@ -12,4 +12,14 @@ This app allows users to:
 
 ps. video conversion is done as background process(es) using Resque gem (background jobs queue/processor)
 
+Common steps to startup the app:
+
+# redis server is necessary for task queue
+sudo /etc/init.d/redis-server start
+# unicorn web server
+unicorn_rails -c config/unicorn.rb -E production -D
+# background workers
+RAILS_ENV=production COUNT=2 QUEUE=* rake resque:workers 2>&1 >> log/workers.production.log &
+
 That's all. Try it!
+
