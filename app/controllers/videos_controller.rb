@@ -47,8 +47,6 @@ class VideosController < ApplicationController
     path = File.join(dir,name)
     File.open(path, "wb") {|f| f.write(params[:Filedata].read) }
     thumb = "public/tmp/uploads/#{name.gsub(/\..*$/, '.jpg')}"
-    logger.info "/usr/bin/ffmpeg -ss 2 -i #{dir}/#{name} -r 1 -f mjpeg -s 320x180 -vframes 1 #{thumb} 2>&1 >> tmp/ff.log"
-    puts "/usr/bin/ffmpeg -ss 2 -i #{dir}/#{name} -r 1 -f mjpeg -s 320x180 -vframes 1 #{thumb} 2>&1 >> tmp/ff.log"
     system("/usr/bin/ffmpeg -ss 2 -i #{dir}/#{name} -r 1 -f mjpeg -s 320x180 -vframes 1 #{thumb} 2>&1 >> tmp/ff.log")
     render :text => "#{dir}/#{name}"
   end
